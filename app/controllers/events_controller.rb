@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
 
-  before_action :logged_in_user, only: [:show, :new, :create, :edit, :destroy]
+  before_action :logged_in_user, only: [:show, :new, :create, :edit, :update, :destroy]
+  before_action :belongs_to_user, only: [:edit, :update]
 
   def index
     @events = Event.all
@@ -83,6 +84,14 @@ class EventsController < ApplicationController
     if !user_signed_in?
       flash[:warning] = "You must be logged in to create an event."
       redirect_to new_user_session_path
+    end
+  end
+
+  def belongs_to_user
+    @event = Event.find(params[:id])
+    if current_user.id != @event.host_id
+      flash[:warning] = "You can't edit someone else's event!"
+      redirect_to @event
     end
   end
 
