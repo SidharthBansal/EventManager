@@ -33,7 +33,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     assert_difference "Event.count", 1 do
       post events_path, params: { event: {
-        host_id: 123541,
+        host_id: @user.id,
         title: "New Years Party",
         body: "This is going be the best party ever! Join me on the last day of the year to celebrate
         the arrival of the new year!",
