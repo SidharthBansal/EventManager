@@ -8,3 +8,10 @@ batman:
   id: 123456
   username: batman
   email: batman@example.com
+
+
+
+robin:
+  id: 654321
+  username: robin
+  email: robin@example.com
